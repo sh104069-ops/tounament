@@ -1,1 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>トーナメント表</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">勝</span>
+      <input id="titleInput" class="title-input" type="text" maxlength="40"
+             placeholder="大会名を入力" aria-label="大会名" autocomplete="off">
+    </div>
+
+    <div class="topbar-tools">
+      <div class="layout-switch" id="layoutSwitch" role="group" aria-label="画面分割"></div>
+      <button type="button" class="btn" id="btnSetup">大会設定</button>
+      <button type="button" class="btn" id="btnPrint">印刷</button>
+      <details class="menu" id="menu">
+        <summary class="btn">その他</summary>
+        <div class="menu-list">
+          <button type="button" id="btnExport">データを書き出す</button>
+          <button type="button" id="btnImport">データを読み込む</button>
+          <button type="button" id="btnReset" class="is-danger">すべて消去する</button>
+        </div>
+      </details>
+    </div>
+  </header>
+
+  <main id="board" class="board" aria-label="トーナメント表"></main>
+
+  <div id="printArea" class="print-area" aria-hidden="true"></div>
+
+  <!-- 大会設定 -->
+  <dialog id="dlgSetup" class="dlg" aria-labelledby="setupTitle">
+    <div class="dlg-inner">
+      <header class="dlg-head">
+        <h2 id="setupTitle">大会設定</h2>
+        <button type="button" class="icon-btn" data-close aria-label="閉じる">×</button>
+      </header>
+      <div class="dlg-body" id="setupBody"></div>
+      <footer class="dlg-foot">
+        <span class="foot-note">入力した内容は自動で保存されます</span>
+        <button type="button" class="btn btn-primary" data-close>トーナメント表を開く</button>
+      </footer>
+    </div>
+  </dialog>
+
+  <!-- 参加者の設定 -->
+  <dialog id="dlgEdit" class="dlg" aria-labelledby="editTitle">
+    <div class="dlg-inner">
+      <header class="dlg-head">
+        <h2 id="editTitle">参加者の設定</h2>
+        <button type="button" class="icon-btn" id="editClose" aria-label="閉じる">×</button>
+      </header>
+      <div class="dlg-body" id="editBody"></div>
+      <footer class="dlg-foot">
+        <button type="button" class="btn btn-quiet" id="editClearResults">勝敗の記録を消す</button>
+        <span class="foot-spacer"></span>
+        <button type="button" class="btn" id="editCancel">キャンセル</button>
+        <button type="button" class="btn btn-primary" id="editSave">保存する</button>
+      </footer>
+    </div>
+  </dialog>
+
+  <!-- 抽選 -->
+  <dialog id="dlgDraw" class="dlg dlg-wide" aria-labelledby="drawTitle">
+    <div class="dlg-inner">
+      <header class="dlg-head">
+        <h2 id="drawTitle">抽選</h2>
+        <button type="button" class="icon-btn" id="drawClose" aria-label="閉じる">×</button>
+      </header>
+      <div class="dlg-body" id="drawBody"></div>
+      <footer class="dlg-foot">
+        <button type="button" class="btn" id="drawUndo">ひとつ戻す</button>
+        <button type="button" class="btn" id="drawAuto">残りをおまかせで決める</button>
+        <span class="foot-spacer"></span>
+        <button type="button" class="btn btn-primary" id="drawCommit">この組み合わせで確定する</button>
+      </footer>
+    </div>
+  </dialog>
+
+  <input type="file" id="fileImport" accept="application/json,.json" hidden>
+
+  <script src="script.js"></script>
+</body>
+</html>
