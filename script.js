@@ -11,6 +11,9 @@
 (() => {
   'use strict';
 
+  // index.html 側で「新しい script.js が読み込まれたか」を確かめるための目印
+  window.TOURNAMENT_APP_VERSION = 2;
+
   /* ========== 定数 ========== */
 
   const STORAGE_KEY = 'tournament-board-v1';

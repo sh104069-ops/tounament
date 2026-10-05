@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>トーナメント表</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
 
@@ -120,6 +120,16 @@
 
   <input type="file" id="fileImport" accept="application/json,.json" hidden>
 
-  <script src="script.js"></script>
+  <!-- ?v=2 は、ブラウザに古いファイルを使わせないための目印です -->
+  <script src="script.js?v=2"></script>
+  <script>
+    // script.js が古いまま（または読み込めていない）ときに、原因を画面に表示する
+    if (window.TOURNAMENT_APP_VERSION !== 2) {
+      var warn = document.createElement('p');
+      warn.textContent = 'script.js が古いか、読み込めていません。index.html・style.css・script.js の3つをすべて新しいものに置き換えてから、ページを再読み込みしてください。';
+      warn.style.cssText = 'position:fixed;left:0;right:0;top:0;z-index:99;margin:0;padding:12px 16px;background:#a9160f;color:#fff;font-weight:700;font-size:14px';
+      document.body.appendChild(warn);
+    }
+  </script>
 </body>
 </html>
